@@ -3,10 +3,22 @@ let amigos = [];
 function adicionar() {
     // Recuperando os elementos HTML para o nome do amigo e para a lista de amigos incluídos
     let nomeAmigo = document.getElementById('nome-amigo');
+    // Condição para verificar se o nome do amigo foi digitado
+    if(nomeAmigo.value == ''){
+        alert('Informe o nome do amigo!');
+        return;
+    }
+
+    // Condição para verificar se o nome do amigo já foi adicionado
+    if(amigos.includes(nomeAmigo.value.toUpperCase())) {
+        alert('Nome já adicionado!');
+        return;
+    }
+
     let listaAmigos = document.getElementById('lista-amigos');
 
     // O array amigos recebe o nome do amigo que foi adicionado
-    amigos.push(nomeAmigo.value);
+    amigos.push(nomeAmigo.value.toUpperCase());
 
     // Se a lista estiver vazia, adicionar na lista de amigos o nome do amigo
     if(listaAmigos.textContent == '') {
@@ -26,6 +38,11 @@ function adicionar() {
 }
 
 function sortear() {
+    // Condição para o usuário adicionar 4 ou mais nomes para efetuar o sorteio
+    if(amigos.length < 4){
+        alert('Adicione 4 ou mais amigos para sortear!');
+        return;
+    }
     // Invocando a função para embaralhar os amigos incluídos
     embaralharArray(amigos);
     // Armazenando o elemento HTML da lista de sorteio
